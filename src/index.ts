@@ -1,9 +1,17 @@
-import { Hono } from 'hono'
+// Hono
+import { Hono } from "hono";
 
-const app = new Hono()
+// Routes
+import routes from "./routes";
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+// ----------------------------
 
-export default app
+const app = new Hono();
+app.route("/", routes);
+
+console.log("Started with routes:");
+routes.routes.forEach((route) => {
+	console.log(`- ${route.method} ${route.path}`);
+});
+
+export default app;
