@@ -47,3 +47,9 @@ export const DELETE_EVENT = async (id: string, data: any) => {
 		headers: data.headers,
 	});
 };
+
+export const GET_USER = async (data: any) => {
+	return await api.get(`user`, {
+		headers: data.headers,
+	});
+};

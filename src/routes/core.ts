@@ -2,7 +2,7 @@
 import { Hono } from "hono";
 
 // Services
-import { DELETE_EVENT, GET_EVENT, GET_EVENT_BY_ID, POST_AUTH, POST_EVENT, PUT_EVENT } from "../services/core";
+import { DELETE_EVENT, GET_EVENT, GET_EVENT_BY_ID, GET_USER, POST_AUTH, POST_EVENT, PUT_EVENT } from "../services/core";
 
 // ----------------------------
 
@@ -56,6 +56,17 @@ app.put("/event/:id", async (c) => {
 app.delete("/event/:id", async (c) => {
 	const headers = c.req.header();
 	const response = await DELETE_EVENT(c.req.param("id"), { headers });
+	const json: Record<string, unknown> = await response.json();
+	return c.json(json);
+});
+
+// ----------------------------
+// User
+// ----------------------------
+
+app.get("/user", async (c) => {
+	const headers = c.req.header();
+	const response = await GET_USER({ headers });
 	const json: Record<string, unknown> = await response.json();
 	return c.json(json);
 });
